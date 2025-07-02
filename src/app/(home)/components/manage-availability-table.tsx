@@ -23,7 +23,7 @@ export function ManageAvailabilityTable({ slots }: { slots: Slot[] }) {
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
-        <Button>Gerenciar</Button>
+        <Button className="ml-auto">Gerenciar</Button>
       </PopoverTrigger>
       <PopoverContent
         align="end"

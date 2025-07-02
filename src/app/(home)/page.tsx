@@ -3,7 +3,6 @@ import { AvailabilityTable } from './components/availability-table'
 import { listAvailability } from '@/actions/availability-actions'
 import { getAvailableSlots } from '@/actions/slot-actions'
 import { redirect } from 'next/navigation'
-import { slots } from '@/lib/database'
 
 import { ManageAvailabilityTable } from './components/manage-availability-table'
 
@@ -19,7 +18,7 @@ export default async function Home(props: {
 
   if (!slotName) {
     const params = new URLSearchParams()
-    params.set('slot', slots[1].name)
+    params.set('slot', '08:00')
     if (filter) params.set('filter', filter)
     redirect(`/?${params.toString()}`)
   }
@@ -31,7 +30,7 @@ export default async function Home(props: {
 
   return (
     <main className="mx-auto min-h-dvh max-w-5xl space-y-6 overflow-hidden border-x px-4 py-10 sm:px-8">
-      <div className="flex items-start justify-between border-b">
+      <div className="flex flex-col-reverse gap-4 border-b sm:flex-row sm:items-start">
         <FilterAvailabilityTable counts={counts} />
 
         <ManageAvailabilityTable slots={availableSlots} />
