@@ -1,18 +1,20 @@
 import type { Availability } from '@/types/availability'
 import { AvailabilityBar } from './availability-bar'
-import { cn } from '@/lib/utils'
+import { cn, isActiveAvailability, isBlockedAvailability } from '@/lib/utils'
 import { AvailabilityBlocker } from './availability-blocked'
 
 interface AvailabilityTableCellProps {
   dayData: Availability | null
   dayIndex: number
   daysCount: number
+  isToday: boolean
 }
 
 export function AvailabilityTableCell({
   dayData,
   dayIndex,
   daysCount,
+  isToday,
 }: AvailabilityTableCellProps) {
   if (dayIndex >= daysCount) {
     return <div className="h-9 bg-neutral-100" />
@@ -22,14 +24,18 @@ export function AvailabilityTableCell({
     <div
       className={cn(
         'mx-0.5 flex h-9 items-center',
-        dayIndex === 0 && 'ml-3',
-        dayIndex === 30 && 'mr-3',
+        dayIndex === 0 && 'ml-4',
+        dayIndex === 30 && 'mr-4',
+        isToday && 'bg-neutral-100/60',
       )}
     >
-      {dayData?.status === 'blocked' && (
-        <AvailabilityBlocker dayData={dayData} />
-      )}
-      {dayData?.status === 'active' && <AvailabilityBar dayData={dayData} />}
+      {dayData ? (
+        isBlockedAvailability(dayData) ? (
+          <AvailabilityBlocker dayData={dayData} />
+        ) : (
+          isActiveAvailability(dayData) && <AvailabilityBar dayData={dayData} />
+        )
+      ) : null}
     </div>
   )
 }

@@ -21,7 +21,7 @@ export function AvailabilityTableHeader({
   } = useSlotManagement(availableSlots)
 
   return (
-    <div className="bg-secondary m-3 flex h-9 w-auto items-center rounded-md">
+    <div className="bg-secondary m-4 flex h-9 w-auto items-center rounded-md">
       {isFirstSlot ? (
         <AddSlotForm isFirstSlot={isFirstSlot} navigate={navigateToSlot} />
       ) : (

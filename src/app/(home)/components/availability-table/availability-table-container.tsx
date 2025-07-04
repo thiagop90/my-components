@@ -49,7 +49,7 @@ export function AvailabilityTableContainer({
       onMouseUp={endDrag}
       onMouseLeave={endDrag}
       className={cn(
-        'bg-background relative w-full overflow-hidden rounded-xl border border-neutral-200/70',
+        'bg-background relative w-full overflow-hidden rounded-xl border',
         drag ? 'cursor-grabbing' : 'cursor-grab',
         className,
       )}

@@ -36,7 +36,7 @@ export default async function Home(props: {
         <ManageAvailabilityTable slots={availableSlots} />
       </div>
 
-      <div className="bg-secondary rounded-[20px] border border-neutral-200/70 p-1.5">
+      <div className="bg-secondary rounded-[20px] border p-1.5">
         <AvailabilityTable data={data} availableSlots={availableSlots} />
       </div>
     </main>

@@ -36,7 +36,7 @@ export function AvailabilityBlocker({
         <Button
           variant="destructive"
           size="icon"
-          className="bg-destructive/10! h-7 w-9 rounded-sm"
+          className="h-7 w-9 rounded-sm bg-red-100 hover:bg-red-100"
         >
           <Lock className="text-destructive/60 size-3" />
         </Button>

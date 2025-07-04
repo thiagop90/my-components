@@ -9,23 +9,27 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useState } from 'react'
 
 interface AvailabilityBarProps {
   dayData: ActiveAvailability
 }
 
 export function AvailabilityBar({ dayData }: AvailabilityBarProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
   const { allSegments, visibleSegments, totalVisible, currentFilter } =
     useAvailabilitySegments(dayData)
 
   if (totalVisible === 0) return null
 
   return (
-    <Popover modal>
+    <Popover modal open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <div
           className={cn(
-            'flex size-9 cursor-pointer flex-col items-center justify-center px-1.5',
+            'flex h-7 w-9 cursor-pointer flex-col items-center justify-center px-1.5',
+            isOpen ? 'bg-background rounded-sm shadow' : '',
           )}
         >
           <p className="mb-0.5 text-[11px] font-semibold">{totalVisible}</p>
