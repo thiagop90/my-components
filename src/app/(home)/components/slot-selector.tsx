@@ -25,7 +25,7 @@ export function SlotSelector({ className }: SlotSelectorProps) {
 
   return (
     <Select value={slotId} onValueChange={navigateToSlot}>
-      <SelectTrigger className={cn('w-full', className)}>
+      <SelectTrigger className={cn('w-full focus-visible:ring-0', className)}>
         <SelectValue placeholder="Selecione um slot" />
       </SelectTrigger>
       <SelectContent className="" align="center" sideOffset={2}>
