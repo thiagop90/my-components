@@ -1,7 +1,6 @@
 import type {
   Availability,
   AvailabilityCounts,
-  FilterType,
   InsertAvailabilityRequest,
 } from '@/types/database'
 import { executeQuery, find } from '../db'
@@ -110,23 +109,7 @@ export class AvailabilityModel {
   static async findByServiceAndSlot(
     serviceId: number,
     slotId: number,
-    filter: FilterType,
   ): Promise<Availability[]> {
-    let filterCondition = ''
-    switch (filter) {
-      case 'available':
-        filterCondition = 'AND (total - sold - standby) > 0'
-        break
-      case 'sold':
-        filterCondition = 'AND sold > 0'
-        break
-      case 'standby':
-        filterCondition = 'AND standby > 0'
-        break
-      default:
-        filterCondition = ''
-    }
-
     return await executeQuery(
       `SELECT 
         id,
@@ -138,8 +121,7 @@ export class AvailabilityModel {
         slot_id,
         service_id
       FROM availability 
-      WHERE service_id = ? AND slot_id = ? ${filterCondition}
-      ORDER BY date ASC`,
+      WHERE service_id = ? AND slot_id = ?`,
       [serviceId, slotId],
     )
   }

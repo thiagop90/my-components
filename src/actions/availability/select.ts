@@ -1,11 +1,7 @@
 'use server'
 
 import { AvailabilityModel } from '@/lib/models/availability'
-import type {
-  Availability,
-  AvailabilityCounts,
-  FilterType,
-} from '@/types/database'
+import type { Availability, AvailabilityCounts } from '@/types/database'
 
 interface AvailabilityResponse {
   data: Availability[]
@@ -15,14 +11,9 @@ interface AvailabilityResponse {
 export async function getAvailability(
   serviceId: number,
   slotId: number,
-  filter: FilterType,
 ): Promise<AvailabilityResponse> {
   try {
-    const data = await AvailabilityModel.findByServiceAndSlot(
-      serviceId,
-      slotId,
-      filter,
-    )
+    const data = await AvailabilityModel.findByServiceAndSlot(serviceId, slotId)
 
     const counts = await AvailabilityModel.findCountsByServiceAndSlot(
       serviceId,

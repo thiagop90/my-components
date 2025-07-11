@@ -7,27 +7,24 @@ import { ManageAvailability } from './components/manage-availability'
 import { ManageService } from './components/manage-service'
 import { getServices } from '@/actions/services'
 import { getAvailability } from '@/actions/availability/select'
-import type { FilterType } from '@/types/database'
 import { SlotProvider } from '@/context/slot-context'
 
 export default async function Home(props: {
   searchParams: Promise<{
     serviceId?: string
     slotId?: string
-    filter?: string
   }>
 }) {
   const searchParams = await props.searchParams
   const serviceId = Number(searchParams.serviceId) || null
   const slotId = Number(searchParams.slotId) || null
-  const filter = (searchParams.filter as FilterType) || 'all'
 
   const services = await getServices()
   const slots = serviceId ? await getSlotsByService(serviceId) : []
 
   const availabilityResult =
     serviceId && slotId
-      ? await getAvailability(serviceId, slotId, filter)
+      ? await getAvailability(serviceId, slotId)
       : { data: [], counts: { all: 0, available: 0, sold: 0, standby: 0 } }
 
   return (
