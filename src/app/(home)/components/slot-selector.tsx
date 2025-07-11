@@ -17,10 +17,11 @@ import { Separator } from '@/components/ui/separator'
 import { useSlotContext } from '@/context/slot-context'
 
 interface SlotSelectorProps {
+  serviceId: number
   className?: string
 }
 
-export function SlotSelector({ className }: SlotSelectorProps) {
+export function SlotSelector({ className, serviceId }: SlotSelectorProps) {
   const { slots, slotId, navigateToSlot } = useSlotContext()
 
   return (
@@ -50,6 +51,7 @@ export function SlotSelector({ className }: SlotSelectorProps) {
         )}
         <SelectSeparator />
         <AddSlotForm
+          serviceId={serviceId}
           variant="ghost"
           className="justify-start rounded-sm font-normal"
         />

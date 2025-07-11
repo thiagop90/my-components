@@ -38,7 +38,7 @@ export function AvailabilityTable({ serviceId, data }: AvailabilityTableProps) {
             >
               <div className="w-[200px] p-4">
                 {serviceId ? (
-                  <ManageSlots />
+                  <ManageSlots serviceId={serviceId} />
                 ) : (
                   <Button variant="secondary" disabled className="w-full">
                     <PlusIcon />

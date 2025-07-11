@@ -15,7 +15,7 @@ import { insertAvailability } from '@/actions/availability/insert'
 import { updateAvailabilityTotal } from '@/actions/availability/update'
 import { blockAvailability } from '@/actions/availability/blocked'
 
-export function ManageAvailability() {
+export function ManageAvailability({ serviceId }: { serviceId: number }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isOptionsOpen, setIsOptionsOpen] = useState(false)
 
@@ -36,6 +36,7 @@ export function ManageAvailability() {
           <div className="bg-background rounded-xl border">
             <AvailabilityForm
               mode="insert"
+              serviceId={serviceId}
               onClose={() => setIsOpen(false)}
               onSubmit={insertAvailability}
             />
@@ -66,6 +67,7 @@ export function ManageAvailability() {
               <TabsContent value="update">
                 <AvailabilityForm
                   mode="update"
+                  serviceId={serviceId}
                   onClose={() => setIsOptionsOpen(false)}
                   onSubmit={updateAvailabilityTotal}
                 />
@@ -73,6 +75,7 @@ export function ManageAvailability() {
               <TabsContent value="block">
                 <AvailabilityForm
                   mode="block"
+                  serviceId={serviceId}
                   onClose={() => setIsOptionsOpen(false)}
                   onSubmit={blockAvailability}
                 />

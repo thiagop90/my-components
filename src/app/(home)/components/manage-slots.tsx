@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import { SlotSelector } from './slot-selector'
 import { useSlotContext } from '@/context/slot-context'
 
-export function ManageSlots() {
+export function ManageSlots({ serviceId }: { serviceId: number }) {
   const {
     slotId,
     isFirstSlot,
@@ -16,14 +16,18 @@ export function ManageSlots() {
   } = useSlotContext()
 
   if (!hasSlots && slotId) {
-    return <AddSlotForm />
+    return <AddSlotForm serviceId={serviceId} />
   }
 
   return (
     <div className="flex h-9 w-full rounded-md">
       {slotId &&
         (isFirstSlot ? (
-          <AddSlotForm size="icon" className="rounded-r-none" />
+          <AddSlotForm
+            serviceId={serviceId}
+            size="icon"
+            className="rounded-r-none"
+          />
         ) : (
           <Button
             className="rounded-r-none shadow-none focus-visible:z-10"
@@ -36,6 +40,7 @@ export function ManageSlots() {
         ))}
 
       <SlotSelector
+        serviceId={serviceId}
         className={cn(
           'bg-muted w-full border-transparent font-medium shadow-none focus-visible:z-10',
           slotId &&
@@ -45,7 +50,11 @@ export function ManageSlots() {
 
       {slotId &&
         (isLastSlot ? (
-          <AddSlotForm size="icon" className="rounded-l-none" />
+          <AddSlotForm
+            serviceId={serviceId}
+            size="icon"
+            className="rounded-l-none"
+          />
         ) : (
           <Button
             className="rounded-l-none shadow-none focus-visible:z-10"

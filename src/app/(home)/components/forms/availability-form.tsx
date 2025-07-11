@@ -21,14 +21,16 @@ interface AvailabilityFormProps {
     _actionState: ActionState,
     formData: FormData,
   ) => Promise<ActionState>
+  serviceId: number
 }
 
 export function AvailabilityForm({
   onClose,
   onSubmit,
   mode,
+  serviceId,
 }: AvailabilityFormProps) {
-  const { slotId, currentSlot } = useSlotContext()
+  const { slotId } = useSlotContext()
 
   const [date, setDate] = useState<DateRange>({
     startDate: null,
@@ -40,11 +42,7 @@ export function AvailabilityForm({
     formData.set('startDate', date.startDate?.toISOString() ?? '')
     formData.set('endDate', date.endDate?.toISOString() ?? '')
 
-    const result = await onSubmit(
-      currentSlot.service_id,
-      EMPTY_FORM_STATE,
-      formData,
-    )
+    const result = await onSubmit(serviceId, EMPTY_FORM_STATE, formData)
 
     if (result.success) {
       toast.success(result.message)
@@ -66,7 +64,7 @@ export function AvailabilityForm({
       <div className="space-y-4 p-3">
         <div className="space-y-2">
           <Label>Slot</Label>
-          <SlotSelector className="w-full" />
+          <SlotSelector serviceId={serviceId} className="w-full" />
         </div>
 
         <div className="space-y-2">

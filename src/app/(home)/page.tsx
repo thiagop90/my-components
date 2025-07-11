@@ -35,7 +35,7 @@ export default async function Home(props: {
 
           <div className="ml-auto flex gap-2">
             <ManageService services={services} />
-            {serviceId && <ManageAvailability />}
+            {serviceId && <ManageAvailability serviceId={serviceId} />}
           </div>
         </div>
 

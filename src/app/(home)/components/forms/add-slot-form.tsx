@@ -21,18 +21,20 @@ interface AddSlotFormProps {
   size?: 'default' | 'icon'
   variant?: 'ghost' | 'secondary'
   className?: string
+  serviceId: number
 }
 
 export function AddSlotForm({
   size = 'default',
   variant = 'secondary',
+  serviceId,
   className,
 }: AddSlotFormProps) {
-  const { navigateToSlot, currentSlot } = useSlotContext()
+  const { navigateToSlot } = useSlotContext()
   const [isOpen, setIsOpen] = useState(false)
 
   async function submitForm(initialState: unknown, formData: FormData) {
-    const result = await createSlot(currentSlot.service_id, formData)
+    const result = await createSlot(serviceId, formData)
 
     if (result.success && result.slotId) {
       toast.success(result.message)
